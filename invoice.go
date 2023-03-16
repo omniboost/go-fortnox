@@ -86,7 +86,7 @@ type Invoice struct {
 	TermsOfPayment            string            `json:"TermsOfPayment"`         // Code of the terms of payment. The code must be of an existing terms of payment.
 	Total                     float64           `json:"Total,omitempty"`        // The total amount of the invoice.
 	TotalVAT                  float64           `json:"TotalVAT,omitempty"`     // The total VAT amount of the invoice.
-	TotalToPay                int               `json:"TotalToPay,omitempty"`
+	TotalToPay                float64           `json:"TotalToPay,omitempty"`
 	VATIncluded               bool              `json:"VATIncluded"`             // If the price of the invoice is including VAT.
 	VoucherNumber             int               `json:"VoucherNumber,omitempty"` // Voucher number for the invoice. This is created when the invoice is bookkept.
 	VoucherSeries             string            `json:"VoucherSeries,omitempty"` // Voucher series for the invoice. This is created when the invoice is bookkept.
