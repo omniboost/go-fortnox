@@ -23,7 +23,7 @@ type Invoice struct {
 	CreditInvoiceReference    string            `json:"CreditInvoiceReference,omitempty"` // Reference to the credit invoice, if one exits. The reference must be a document number for an existing credit invoice.
 	City                      string            `json:"City,omitempty"`                   // City for the invoice address.
 	Comments                  string            `json:"Comments"`                         // Comments of the invoice
-	ContractReference         int               `json:"ContractReference,omitempty"`      // Reference to the contract, if one exists.
+	ContractReference         string               `json:"ContractReference,omitempty"`      // Reference to the contract, if one exists.
 	ContributionPercent       float64           `json:"ContributionPercent,omitempty"`    // Invoice contribution in percent.
 	ContributionValue         float64           `json:"ContributionValue,omitempty"`      // Invoice contribution in amount.
 	Country                   string            `json:"Country"`                          // Country for the invoice address. Must be a name of an existing country.
