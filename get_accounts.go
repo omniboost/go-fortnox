@@ -36,6 +36,7 @@ func (r GetAccountsRequest) NewGetAccountsQueryParams() *GetAccountsQueryParams 
 }
 
 type GetAccountsQueryParams struct {
+	Page int `schema:"page,omitempty"`
 }
 
 func (p GetAccountsQueryParams) ToURLValues() (url.Values, error) {
@@ -120,4 +121,25 @@ func (r *GetAccountsRequest) Do() (GetAccountsResponseBody, error) {
 	responseBody := r.NewResponseBody()
 	_, err = r.client.Do(req, responseBody)
 	return *responseBody, err
+}
+
+func (r *GetAccountsRequest) All() (GetAccountsResponseBody, error) {
+	resp, err := r.Do()
+	if err != nil {
+		return resp, err
+	}
+
+	for resp.MetaInformation.CurrentPage < resp.MetaInformation.TotalPages {
+		r.QueryParams().Page = resp.MetaInformation.CurrentPage + 1
+		page, err := r.Do()
+		if err != nil {
+			return resp, err
+		}
+
+		resp.Accounts = append(resp.Accounts, page.Accounts...)
+
+		resp.MetaInformation.CurrentPage++
+	}
+
+	return resp, nil
 }
