@@ -8,7 +8,7 @@ type OrderRow struct {
 	Currency                  string  `json:"Currency,omitempty"`
 	CustomerName              string  `json:"CustomerName,omitempty"`
 	CustomerNumber            string  `json:"CustomerNumber,omitempty"`
-	DeliveryDate              string  `json:"DeliveryDate,omitempty"`
+	DeliveryDate              Date    `json:"DeliveryDate"`
 	DocumentNumber            string  `json:"DocumentNumber,omitempty"`
 	ExternalInvoiceReference1 string  `json:"ExternalInvoiceReference1,omitempty"`
 	ExternalInvoiceReference2 string  `json:"ExternalInvoiceReference2,omitempty"`
@@ -22,50 +22,43 @@ type OrderRow struct {
 type Orders []Order
 
 type Order struct {
-	URL                  string `json:"@url,omitempty"`
-	URLTaxReductionList  string `json:"@urlTaxReductionList,omitempty"`
-	Address1             string `json:"Address1,omitempty"`
-	Address2             string `json:"Address2,omitempty"`
-	AdministrationFee    int    `json:"AdministrationFee,omitempty"`
-	AdministrationFeeVAT int    `json:"AdministrationFeeVAT,omitempty"`
-	BasisTaxReduction    int    `json:"BasisTaxReduction,omitempty"`
-	Cancelled            bool   `json:"Cancelled,omitempty"`
-	City                 string `json:"City,omitempty"`
-	Comments             string `json:"Comments,omitempty"`
-	ContributionPercent  int    `json:"ContributionPercent,omitempty"`
-	ContributionValue    int    `json:"ContributionValue,omitempty"`
-	CopyRemarks          bool   `json:"CopyRemarks,omitempty"`
-	CostCenter           string `json:"CostCenter,omitempty"`
-	Country              string `json:"Country,omitempty"`
-	Currency             string `json:"Currency,omitempty"`
-	CurrencyRate         int    `json:"CurrencyRate,omitempty"`
-	CurrencyUnit         int    `json:"CurrencyUnit,omitempty"`
-	CustomerName         string `json:"CustomerName,omitempty"`
-	CustomerNumber       string `json:"CustomerNumber,omitempty"`
-	DeliveryAddress1     string `json:"DeliveryAddress1,omitempty"`
-	DeliveryAddress2     string `json:"DeliveryAddress2,omitempty"`
-	DeliveryCity         string `json:"DeliveryCity,omitempty"`
-	DeliveryCountry      string `json:"DeliveryCountry,omitempty"`
-	DeliveryDate         string `json:"DeliveryDate,omitempty"`
-	DeliveryName         string `json:"DeliveryName,omitempty"`
-	DeliveryState        string `json:"DeliveryState,omitempty"`
-	DeliveryZipCode      string `json:"DeliveryZipCode,omitempty"`
-	DocumentNumber       string `json:"DocumentNumber,omitempty"`
-	EmailInformation     struct {
-		EmailAddressBCC  string `json:"EmailAddressBCC,omitempty"`
-		EmailAddressCC   string `json:"EmailAddressCC,omitempty"`
-		EmailAddressFrom string `json:"EmailAddressFrom,omitempty"`
-		EmailAddressTo   string `json:"EmailAddressTo,omitempty"`
-		EmailBody        string `json:"EmailBody,omitempty"`
-		EmailSubject     string `json:"EmailSubject,omitempty"`
-	} `json:"EmailInformation,omitempty"`
-	ExternalInvoiceReference1 string `json:"ExternalInvoiceReference1,omitempty"`
-	ExternalInvoiceReference2 string `json:"ExternalInvoiceReference2,omitempty"`
-	Freight                   int    `json:"Freight,omitempty"`
-	FreightVAT                int    `json:"FreightVAT,omitempty"`
-	Gross                     int    `json:"Gross,omitempty"`
-	HouseWork                 bool   `json:"HouseWork,omitempty"`
-	InvoiceReference          string `json:"InvoiceReference,omitempty"`
+	URL                       string            `json:"@url,omitempty"`
+	URLTaxReductionList       string            `json:"@urlTaxReductionList,omitempty"`
+	Address1                  string            `json:"Address1,omitempty"`
+	Address2                  string            `json:"Address2,omitempty"`
+	AdministrationFee         int               `json:"AdministrationFee,omitempty"`
+	AdministrationFeeVAT      int               `json:"AdministrationFeeVAT,omitempty"`
+	BasisTaxReduction         int               `json:"BasisTaxReduction,omitempty"`
+	Cancelled                 bool              `json:"Cancelled,omitempty"`
+	City                      string            `json:"City,omitempty"`
+	Comments                  string            `json:"Comments,omitempty"`
+	ContributionPercent       int               `json:"ContributionPercent,omitempty"`
+	ContributionValue         int               `json:"ContributionValue,omitempty"`
+	CopyRemarks               bool              `json:"CopyRemarks,omitempty"`
+	CostCenter                string            `json:"CostCenter,omitempty"`
+	Country                   string            `json:"Country,omitempty"`
+	Currency                  string            `json:"Currency,omitempty"`
+	CurrencyRate              Number            `json:"CurrencyRate"`
+	CurrencyUnit              float64           `json:"CurrencyUnit"`
+	CustomerName              string            `json:"CustomerName,omitempty"`
+	CustomerNumber            string            `json:"CustomerNumber,omitempty"`
+	DeliveryAddress1          string            `json:"DeliveryAddress1,omitempty"`
+	DeliveryAddress2          string            `json:"DeliveryAddress2,omitempty"`
+	DeliveryCity              string            `json:"DeliveryCity,omitempty"`
+	DeliveryCountry           string            `json:"DeliveryCountry,omitempty"`
+	DeliveryDate              Date              `json:"DeliveryDate,omitempty"`
+	DeliveryName              string            `json:"DeliveryName,omitempty"`
+	DeliveryState             string            `json:"DeliveryState,omitempty"`
+	DeliveryZipCode           string            `json:"DeliveryZipCode,omitempty"`
+	DocumentNumber            string            `json:"DocumentNumber,omitempty"`
+	EmailInformation          *EmailInformation `json:"EmailInformation,omitempty"`
+	ExternalInvoiceReference1 string            `json:"ExternalInvoiceReference1,omitempty"`
+	ExternalInvoiceReference2 string            `json:"ExternalInvoiceReference2,omitempty"`
+	Freight                   int               `json:"Freight,omitempty"`
+	FreightVAT                int               `json:"FreightVAT,omitempty"`
+	Gross                     int               `json:"Gross,omitempty"`
+	HouseWork                 bool              `json:"HouseWork,omitempty"`
+	InvoiceReference          string            `json:"InvoiceReference,omitempty"`
 	Labels                    []struct {
 		ID int `json:"Id,omitempty"`
 	} `json:"Labels,omitempty"`
@@ -75,29 +68,29 @@ type Order struct {
 	OfferReference string `json:"OfferReference,omitempty"`
 	OrderDate      string `json:"OrderDate,omitempty"`
 	OrderRows      []struct {
-		AccountNumber          int    `json:"AccountNumber,omitempty"`
-		ArticleNumber          string `json:"ArticleNumber,omitempty"`
-		ContributionPercent    string `json:"ContributionPercent,omitempty"`
-		ContributionValue      string `json:"ContributionValue,omitempty"`
-		CostCenter             string `json:"CostCenter,omitempty"`
-		DeliveredQuantity      string `json:"DeliveredQuantity,omitempty"`
-		Description            string `json:"Description,omitempty"`
-		Discount               int    `json:"Discount,omitempty"`
-		DiscountType           string `json:"DiscountType,omitempty"`
-		HouseWork              bool   `json:"HouseWork,omitempty"`
-		HouseWorkHoursToReport int    `json:"HouseWorkHoursToReport,omitempty"`
-		HouseWorkType          string `json:"HouseWorkType,omitempty"`
-		OrderedQuantity        string `json:"OrderedQuantity,omitempty"`
-		Price                  int    `json:"Price,omitempty"`
-		Project                string `json:"Project,omitempty"`
-		ReservedQuantity       string `json:"ReservedQuantity,omitempty"`
-		RowID                  int    `json:"RowId,omitempty"`
-		StockPointCode         string `json:"StockPointCode,omitempty"`
-		StockPointID           string `json:"StockPointId,omitempty"`
-		Total                  int    `json:"Total,omitempty"`
-		Unit                   string `json:"Unit,omitempty"`
-		VAT                    int    `json:"VAT,omitempty"`
-		VATCode                string `json:"VATCode,omitempty"`
+		AccountNumber          int     `json:"AccountNumber,omitempty"`
+		ArticleNumber          string  `json:"ArticleNumber,omitempty"`
+		ContributionPercent    string  `json:"ContributionPercent,omitempty"`
+		ContributionValue      string  `json:"ContributionValue,omitempty"`
+		CostCenter             string  `json:"CostCenter,omitempty"`
+		DeliveredQuantity      string  `json:"DeliveredQuantity,omitempty"`
+		Description            string  `json:"Description,omitempty"`
+		Discount               float64 `json:"Discount,omitempty"`
+		DiscountType           string  `json:"DiscountType,omitempty"`
+		HouseWork              bool    `json:"HouseWork,omitempty"`
+		HouseWorkHoursToReport int     `json:"HouseWorkHoursToReport,omitempty"`
+		HouseWorkType          string  `json:"HouseWorkType,omitempty"`
+		OrderedQuantity        string  `json:"OrderedQuantity,omitempty"`
+		Price                  float64 `json:"Price,omitempty"`
+		Project                string  `json:"Project,omitempty"`
+		ReservedQuantity       string  `json:"ReservedQuantity,omitempty"`
+		RowID                  int     `json:"RowId,omitempty"`
+		StockPointCode         string  `json:"StockPointCode,omitempty"`
+		StockPointID           string  `json:"StockPointId,omitempty"`
+		Total                  int     `json:"Total,omitempty"`
+		Unit                   string  `json:"Unit,omitempty"`
+		VAT                    int     `json:"VAT,omitempty"`
+		VATCode                string  `json:"VATCode,omitempty"`
 	} `json:"OrderRows,omitempty"`
 	OrderType          string `json:"OrderType,omitempty"`
 	OrganisationNumber string `json:"OrganisationNumber,omitempty"`
