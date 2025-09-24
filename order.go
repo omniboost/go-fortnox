@@ -12,7 +12,7 @@ type OrderRow struct {
 	DocumentNumber            string  `json:"DocumentNumber,omitempty"`
 	ExternalInvoiceReference1 string  `json:"ExternalInvoiceReference1,omitempty"`
 	ExternalInvoiceReference2 string  `json:"ExternalInvoiceReference2,omitempty"`
-	OrderDate                 string  `json:"OrderDate,omitempty"`
+	OrderDate                 Date    `json:"OrderDate,omitempty"`
 	OrderType                 string  `json:"OrderType,omitempty"`
 	Project                   string  `json:"Project,omitempty"`
 	Sent                      bool    `json:"Sent,omitempty"`
@@ -66,7 +66,7 @@ type Order struct {
 	Net            int    `json:"Net,omitempty"`
 	NotCompleted   bool   `json:"NotCompleted,omitempty"`
 	OfferReference string `json:"OfferReference,omitempty"`
-	OrderDate      string `json:"OrderDate,omitempty"`
+	OrderDate      Date   `json:"OrderDate,omitempty"`
 	OrderRows      []struct {
 		AccountNumber          int     `json:"AccountNumber,omitempty"`
 		ArticleNumber          string  `json:"ArticleNumber,omitempty"`
@@ -87,9 +87,9 @@ type Order struct {
 		RowID                  int     `json:"RowId,omitempty"`
 		StockPointCode         string  `json:"StockPointCode,omitempty"`
 		StockPointID           string  `json:"StockPointId,omitempty"`
-		Total                  int     `json:"Total,omitempty"`
+		Total                  float64 `json:"Total,omitempty"`
 		Unit                   string  `json:"Unit,omitempty"`
-		VAT                    int     `json:"VAT,omitempty"`
+		VAT                    float64 `json:"VAT,omitempty"`
 		VATCode                string  `json:"VATCode,omitempty"`
 	} `json:"OrderRows,omitempty"`
 	OrderType          string `json:"OrderType,omitempty"`
