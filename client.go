@@ -394,7 +394,7 @@ func CheckResponse(r *http.Response) error {
 		return errorResponse
 	}
 
-	err = checkContentType(r)
+	err = checkContentType(r, data)
 	if err != nil {
 		errorResponse.ErrorInformation = err
 		return errorResponse
@@ -442,11 +442,21 @@ func (e ErrorInformation) Error() string {
 	return fmt.Sprintf("%d: %s", e.Code, e.Message)
 }
 
-func checkContentType(response *http.Response) error {
+func checkContentType(response *http.Response, data []byte) error {
 	header := response.Header.Get("Content-Type")
 	contentType := strings.Split(header, ";")[0]
+
+	// if the response is not JSON, fall back to raw data
 	if contentType != mediaType {
-		return fmt.Errorf("Expected Content-Type \"%s\", got \"%s\"", mediaType, contentType)
+		msg := strings.TrimSpace(string(data))
+		if msg == "" {
+			msg = response.Status
+		}
+		ei := ErrorInformation{
+			Message: msg,
+			Code:    response.StatusCode,
+		}
+		return ei
 	}
 
 	return nil
