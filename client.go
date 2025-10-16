@@ -33,7 +33,7 @@ var (
 		Host:   "api.fortnox.se",
 		Path:   "/3",
 	}
-	requestTimestamps = make(map[string]*timestamps)
+	requestTimestamps = sync.Map{} // map[string]*timestamps
 	requestsPerSecond = 4
 )
 
@@ -109,8 +109,8 @@ func (c Client) AccessToken() string {
 
 func (c *Client) SetAccessToken(accessToken string) {
 	c.accessToken = accessToken
-	if requestTimestamps[accessToken] == nil {
-		requestTimestamps[accessToken] = &timestamps{}
+	if _, ok := requestTimestamps.Load(accessToken); !ok {
+		requestTimestamps.Store(accessToken, &timestamps{})
 	}
 }
 
@@ -245,6 +245,12 @@ func (c *Client) Do(req *http.Request, responseBody interface{}) (*http.Response
 		log.Println(string(dump))
 	}
 
+	// Handle '429 - Too many requests' response
+	if httpResp.StatusCode == 429 {
+		c.SleepUntilRequestRate()
+		return c.Do(req, responseBody)
+	}
+
 	// check if the response isn't an error
 	err = CheckResponse(httpResp)
 	if err != nil {
@@ -284,26 +290,39 @@ func (c *Client) Do(req *http.Request, responseBody interface{}) (*http.Response
 }
 
 func (c *Client) RegisterRequestTimestamp(t time.Time) {
-	if len(*requestTimestamps[c.accessToken]) >= requestsPerSecond {
-		ts := (*requestTimestamps[c.accessToken])[1:requestsPerSecond]
-		requestTimestamps[c.accessToken] = &ts
+	var ts timestamps
+	if cache, ok := requestTimestamps.Load(c.accessToken); ok {
+		ts = *cache.(*timestamps)
 	}
-	ts := append(*requestTimestamps[c.accessToken], t)
-	requestTimestamps[c.accessToken] = &ts
+
+	if len(ts) >= requestsPerSecond {
+		// Keep only the last requestsPerSecond-1 timestamps
+		ts = ts[1:requestsPerSecond]
+		requestTimestamps.Store(c.accessToken, &ts)
+	}
+
+	ts = append(ts, t)
+	requestTimestamps.Store(c.accessToken, &ts)
 }
 
 func (c *Client) SleepUntilRequestRate() {
 	// Requestrate is 4r/1s
 
+	// Get the timestamps
+	var ts timestamps
+	if cache, ok := requestTimestamps.Load(c.accessToken); ok {
+		ts = *cache.(*timestamps)
+	}
+
 	// if there are less then 4 registered requests: execute the request
 	// immediately
-	if len(*requestTimestamps[c.accessToken]) < (requestsPerSecond - 1) {
+	if len(ts) < (requestsPerSecond - 1) {
 		return
 	}
 
 	// is the first item within 1 second? If it's > 1 second the request can be
 	// executed imediately
-	diff := time.Now().Sub((*requestTimestamps[c.accessToken])[0])
+	diff := time.Now().Sub(ts[0])
 	if diff >= time.Second {
 		return
 	}
