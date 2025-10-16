@@ -46,6 +46,7 @@ type GetArticlesQueryParams struct {
 	Webshop                   string `schema:"webshop,omitempty"`
 	LastModified              string `schema:"lastmodified,omitempty"`
 	SortBy                    string `schema:"sortby,omitempty"`
+	Page                      int    `schema:"page,omitempty"`
 }
 
 func (p GetArticlesQueryParams) ToURLValues() (url.Values, error) {
@@ -130,4 +131,35 @@ func (r *GetArticlesRequest) Do() (GetArticlesResponseBody, error) {
 	responseBody := r.NewResponseBody()
 	_, err = r.client.Do(req, responseBody)
 	return *responseBody, err
+}
+
+func (r *GetArticlesRequest) All() (ArticleRows, error) {
+	entities := ArticleRows{}
+
+	// Set page to 1
+	r.QueryParams().Page = 1
+
+	for {
+		resp, err := r.Do()
+		if err != nil {
+			return entities, err
+		}
+
+		// Break out of loop when no blocks are found
+		if len(resp.Articles) == 0 {
+			break
+		}
+
+		// Add blocks to list
+		entities = append(entities, resp.Articles...)
+
+		if len(entities) == resp.MetaInformation.TotalResources || resp.MetaInformation.CurrentPage == resp.MetaInformation.TotalPages {
+			break
+		}
+
+		// Increment page number
+		r.QueryParams().Page = r.QueryParams().Page + 1
+	}
+
+	return entities, nil
 }
