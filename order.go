@@ -32,8 +32,8 @@ type Order struct {
 	Cancelled                 bool              `json:"Cancelled,omitempty"`
 	City                      string            `json:"City,omitempty"`
 	Comments                  string            `json:"Comments,omitempty"`
-	ContributionPercent       int               `json:"ContributionPercent,omitempty"`
-	ContributionValue         int               `json:"ContributionValue,omitempty"`
+	ContributionPercent       Number            `json:"ContributionPercent,omitempty"`
+	ContributionValue         Number            `json:"ContributionValue,omitempty"`
 	CopyRemarks               bool              `json:"CopyRemarks,omitempty"`
 	CostCenter                string            `json:"CostCenter,omitempty"`
 	Country                   string            `json:"Country,omitempty"`
