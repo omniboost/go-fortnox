@@ -111,9 +111,9 @@ type Order struct {
 	TermsOfDelivery    string  `json:"TermsOfDelivery,omitempty"`
 	TermsOfPayment     string  `json:"TermsOfPayment,omitempty"`
 	TimeBasisReference int     `json:"TimeBasisReference,omitempty"`
-	Total              int     `json:"Total,omitempty"`
-	TotalToPay         int     `json:"TotalToPay,omitempty"`
-	TotalVAT           int     `json:"TotalVAT,omitempty"`
+	Total              float64 `json:"Total,omitempty"`
+	TotalToPay         float64 `json:"TotalToPay,omitempty"`
+	TotalVAT           float64 `json:"TotalVAT,omitempty"`
 	VATIncluded        bool    `json:"VATIncluded,omitempty"`
 	WarehouseReady     bool    `json:"WarehouseReady,omitempty"`
 	WayOfDelivery      string  `json:"WayOfDelivery,omitempty"`
