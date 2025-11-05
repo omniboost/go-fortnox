@@ -56,17 +56,17 @@ type Order struct {
 	ExternalInvoiceReference2 string            `json:"ExternalInvoiceReference2,omitempty"`
 	Freight                   int               `json:"Freight,omitempty"`
 	FreightVAT                int               `json:"FreightVAT,omitempty"`
-	Gross                     int               `json:"Gross,omitempty"`
+	Gross                     float64           `json:"Gross,omitempty"`
 	HouseWork                 bool              `json:"HouseWork,omitempty"`
 	InvoiceReference          string            `json:"InvoiceReference,omitempty"`
 	Labels                    []struct {
 		ID int `json:"Id,omitempty"`
 	} `json:"Labels,omitempty"`
-	Language       string `json:"Language,omitempty"`
-	Net            int    `json:"Net,omitempty"`
-	NotCompleted   bool   `json:"NotCompleted,omitempty"`
-	OfferReference string `json:"OfferReference,omitempty"`
-	OrderDate      Date   `json:"OrderDate,omitempty"`
+	Language       string  `json:"Language,omitempty"`
+	Net            float64 `json:"Net,omitempty"`
+	NotCompleted   bool    `json:"NotCompleted,omitempty"`
+	OfferReference string  `json:"OfferReference,omitempty"`
+	OrderDate      Date    `json:"OrderDate,omitempty"`
 	OrderRows      []struct {
 		AccountNumber          int     `json:"AccountNumber,omitempty"`
 		ArticleNumber          string  `json:"ArticleNumber,omitempty"`
@@ -92,32 +92,32 @@ type Order struct {
 		VAT                    float64 `json:"VAT,omitempty"`
 		VATCode                string  `json:"VATCode,omitempty"`
 	} `json:"OrderRows,omitempty"`
-	OrderType          string `json:"OrderType,omitempty"`
-	OrganisationNumber string `json:"OrganisationNumber,omitempty"`
-	OurReference       string `json:"OurReference,omitempty"`
-	OutboundDate       string `json:"OutboundDate,omitempty"`
-	Phone1             string `json:"Phone1,omitempty"`
-	Phone2             string `json:"Phone2,omitempty"`
-	PriceList          string `json:"PriceList,omitempty"`
-	PrintTemplate      string `json:"PrintTemplate,omitempty"`
-	Project            string `json:"Project,omitempty"`
-	Remarks            string `json:"Remarks,omitempty"`
-	RoundOff           int    `json:"RoundOff,omitempty"`
-	Sent               bool   `json:"Sent,omitempty"`
-	StockPointCode     string `json:"StockPointCode,omitempty"`
-	StockPointID       string `json:"StockPointId,omitempty"`
-	TaxReduction       int    `json:"TaxReduction,omitempty"`
-	TaxReductionType   string `json:"TaxReductionType,omitempty"`
-	TermsOfDelivery    string `json:"TermsOfDelivery,omitempty"`
-	TermsOfPayment     string `json:"TermsOfPayment,omitempty"`
-	TimeBasisReference int    `json:"TimeBasisReference,omitempty"`
-	Total              int    `json:"Total,omitempty"`
-	TotalToPay         int    `json:"TotalToPay,omitempty"`
-	TotalVAT           int    `json:"TotalVAT,omitempty"`
-	VATIncluded        bool   `json:"VATIncluded,omitempty"`
-	WarehouseReady     bool   `json:"WarehouseReady,omitempty"`
-	WayOfDelivery      string `json:"WayOfDelivery,omitempty"`
-	YourOrderNumber    string `json:"YourOrderNumber,omitempty"`
-	YourReference      string `json:"YourReference,omitempty"`
-	ZipCode            string `json:"ZipCode,omitempty"`
+	OrderType          string  `json:"OrderType,omitempty"`
+	OrganisationNumber string  `json:"OrganisationNumber,omitempty"`
+	OurReference       string  `json:"OurReference,omitempty"`
+	OutboundDate       string  `json:"OutboundDate,omitempty"`
+	Phone1             string  `json:"Phone1,omitempty"`
+	Phone2             string  `json:"Phone2,omitempty"`
+	PriceList          string  `json:"PriceList,omitempty"`
+	PrintTemplate      string  `json:"PrintTemplate,omitempty"`
+	Project            string  `json:"Project,omitempty"`
+	Remarks            string  `json:"Remarks,omitempty"`
+	RoundOff           float64 `json:"RoundOff,omitempty"`
+	Sent               bool    `json:"Sent,omitempty"`
+	StockPointCode     string  `json:"StockPointCode,omitempty"`
+	StockPointID       string  `json:"StockPointId,omitempty"`
+	TaxReduction       int     `json:"TaxReduction,omitempty"`
+	TaxReductionType   string  `json:"TaxReductionType,omitempty"`
+	TermsOfDelivery    string  `json:"TermsOfDelivery,omitempty"`
+	TermsOfPayment     string  `json:"TermsOfPayment,omitempty"`
+	TimeBasisReference int     `json:"TimeBasisReference,omitempty"`
+	Total              int     `json:"Total,omitempty"`
+	TotalToPay         int     `json:"TotalToPay,omitempty"`
+	TotalVAT           int     `json:"TotalVAT,omitempty"`
+	VATIncluded        bool    `json:"VATIncluded,omitempty"`
+	WarehouseReady     bool    `json:"WarehouseReady,omitempty"`
+	WayOfDelivery      string  `json:"WayOfDelivery,omitempty"`
+	YourOrderNumber    string  `json:"YourOrderNumber,omitempty"`
+	YourReference      string  `json:"YourReference,omitempty"`
+	ZipCode            string  `json:"ZipCode,omitempty"`
 }
