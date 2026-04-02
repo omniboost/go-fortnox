@@ -1,6 +1,7 @@
 package fortnox_test
 
 import (
+	"context"
 	"encoding/json"
 	"log"
 	"testing"
@@ -16,7 +17,7 @@ func TestPostCustomer(t *testing.T) {
 	customer.Type = fortnox.CustomerTypePrivate
 	customer.VATType = fortnox.VATTypeSEVAT
 	req.RequestBody().Customer = customer
-	resp, err := req.Do()
+	resp, err := req.Do(context.Background())
 	if err != nil {
 		t.Error(err)
 	}

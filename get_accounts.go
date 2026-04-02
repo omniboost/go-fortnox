@@ -1,6 +1,7 @@
 package fortnox
 
 import (
+	"context"
 	"net/http"
 	"net/url"
 
@@ -105,9 +106,9 @@ func (r *GetAccountsRequest) URL() url.URL {
 	return r.client.GetEndpointURL("/accounts", r.PathParams())
 }
 
-func (r *GetAccountsRequest) Do() (GetAccountsResponseBody, error) {
+func (r *GetAccountsRequest) Do(ctx context.Context) (GetAccountsResponseBody, error) {
 	// Create http request
-	req, err := r.client.NewRequest(nil, r.Method(), r.URL(), nil)
+	req, err := r.client.NewRequest(ctx, r.Method(), r.URL(), nil)
 	if err != nil {
 		return *r.NewResponseBody(), err
 	}
@@ -123,15 +124,15 @@ func (r *GetAccountsRequest) Do() (GetAccountsResponseBody, error) {
 	return *responseBody, err
 }
 
-func (r *GetAccountsRequest) All() (GetAccountsResponseBody, error) {
-	resp, err := r.Do()
+func (r *GetAccountsRequest) All(ctx context.Context) (GetAccountsResponseBody, error) {
+	resp, err := r.Do(ctx)
 	if err != nil {
 		return resp, err
 	}
 
 	for resp.MetaInformation.CurrentPage < resp.MetaInformation.TotalPages {
 		r.QueryParams().Page = resp.MetaInformation.CurrentPage + 1
-		page, err := r.Do()
+		page, err := r.Do(ctx)
 		if err != nil {
 			return resp, err
 		}

@@ -1,6 +1,7 @@
 package fortnox_test
 
 import (
+	"context"
 	"encoding/json"
 	"log"
 	"testing"
@@ -8,7 +9,7 @@ import (
 
 func TestGetAccounts(t *testing.T) {
 	req := client.NewGetAccountsRequest()
-	resp, err := req.Do()
+	resp, err := req.Do(context.Background())
 	if err != nil {
 		t.Error(err)
 	}
@@ -19,7 +20,7 @@ func TestGetAccounts(t *testing.T) {
 
 func TestAllAccounts(t *testing.T) {
 	req := client.NewGetAccountsRequest()
-	resp, err := req.All()
+	resp, err := req.All(context.Background())
 	if err != nil {
 		t.Error(err)
 	}

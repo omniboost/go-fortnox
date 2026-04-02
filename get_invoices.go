@@ -1,6 +1,7 @@
 package fortnox
 
 import (
+	"context"
 	"net/http"
 	"net/url"
 
@@ -108,9 +109,9 @@ func (r *GetInvoicesRequest) URL() url.URL {
 	return r.client.GetEndpointURL("/invoices", r.PathParams())
 }
 
-func (r *GetInvoicesRequest) Do() (GetInvoicesResponseBody, error) {
+func (r *GetInvoicesRequest) Do(ctx context.Context) (GetInvoicesResponseBody, error) {
 	// Create http request
-	req, err := r.client.NewRequest(nil, r.Method(), r.URL(), nil)
+	req, err := r.client.NewRequest(ctx, r.Method(), r.URL(), nil)
 	if err != nil {
 		return *r.NewResponseBody(), err
 	}

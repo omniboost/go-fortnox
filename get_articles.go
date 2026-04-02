@@ -1,6 +1,7 @@
 package fortnox
 
 import (
+	"context"
 	"net/http"
 	"net/url"
 
@@ -115,9 +116,9 @@ func (r *GetArticlesRequest) URL() url.URL {
 	return r.client.GetEndpointURL("/articles", r.PathParams())
 }
 
-func (r *GetArticlesRequest) Do() (GetArticlesResponseBody, error) {
+func (r *GetArticlesRequest) Do(ctx context.Context) (GetArticlesResponseBody, error) {
 	// Create http request
-	req, err := r.client.NewRequest(nil, r.Method(), r.URL(), nil)
+	req, err := r.client.NewRequest(ctx, r.Method(), r.URL(), nil)
 	if err != nil {
 		return *r.NewResponseBody(), err
 	}
@@ -133,14 +134,14 @@ func (r *GetArticlesRequest) Do() (GetArticlesResponseBody, error) {
 	return *responseBody, err
 }
 
-func (r *GetArticlesRequest) All() (ArticleRows, error) {
+func (r *GetArticlesRequest) All(ctx context.Context) (ArticleRows, error) {
 	entities := ArticleRows{}
 
 	// Set page to 1
 	r.QueryParams().Page = 1
 
 	for {
-		resp, err := r.Do()
+		resp, err := r.Do(ctx)
 		if err != nil {
 			return entities, err
 		}

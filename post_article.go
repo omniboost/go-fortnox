@@ -1,6 +1,7 @@
 package fortnox
 
 import (
+	"context"
 	"net/http"
 	"net/url"
 
@@ -115,9 +116,9 @@ func (r *PostArticleRequest) URL() url.URL {
 	return r.client.GetEndpointURL("/articles", r.PathParams())
 }
 
-func (r *PostArticleRequest) Do() (PostArticleResponseBody, error) {
+func (r *PostArticleRequest) Do(ctx context.Context) (PostArticleResponseBody, error) {
 	// Create http request
-	req, err := r.client.NewRequest(nil, r.Method(), r.URL(), r.RequestBody())
+	req, err := r.client.NewRequest(ctx, r.Method(), r.URL(), r.RequestBody())
 	if err != nil {
 		return *r.NewResponseBody(), err
 	}

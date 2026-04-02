@@ -1,6 +1,7 @@
 package fortnox_test
 
 import (
+	"context"
 	"encoding/json"
 	"log"
 	"testing"
@@ -25,7 +26,7 @@ func TestPostInvoice(t *testing.T) {
 	}
 	invoice.InvoiceRows = append(invoice.InvoiceRows, rows...)
 	req.RequestBody().Invoice = invoice
-	resp, err := req.Do()
+	resp, err := req.Do(context.Background())
 	if err != nil {
 		t.Error(err)
 	}

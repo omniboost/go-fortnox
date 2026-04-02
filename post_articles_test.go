@@ -1,6 +1,7 @@
 package fortnox_test
 
 import (
+	"context"
 	"encoding/json"
 	"log"
 	"testing"
@@ -12,7 +13,7 @@ func TestPostArticle(t *testing.T) {
 	article.Description = "Test from API #2"
 	article.ArticleNumber = "TEST-002"
 	req.RequestBody().Article = article
-	resp, err := req.Do()
+	resp, err := req.Do(context.Background())
 	if err != nil {
 		t.Error(err)
 	}

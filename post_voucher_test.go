@@ -1,6 +1,7 @@
 package fortnox_test
 
 import (
+	"context"
 	"encoding/json"
 	"log"
 	"testing"
@@ -28,7 +29,7 @@ func TestPostVoucher(t *testing.T) {
 	}
 	voucher.VoucherRows = append(voucher.VoucherRows, rows...)
 	req.RequestBody().Voucher = voucher
-	resp, err := req.Do()
+	resp, err := req.Do(context.Background())
 	if err != nil {
 		t.Error(err)
 	}

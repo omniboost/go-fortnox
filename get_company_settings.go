@@ -1,6 +1,7 @@
 package fortnox
 
 import (
+	"context"
 	"net/http"
 	"net/url"
 
@@ -103,9 +104,9 @@ func (r *GetCompanySettingsRequest) URL() url.URL {
 	return r.client.GetEndpointURL("/settings/company", r.PathParams())
 }
 
-func (r *GetCompanySettingsRequest) Do() (GetCompanySettingsResponseBody, error) {
+func (r *GetCompanySettingsRequest) Do(ctx context.Context) (GetCompanySettingsResponseBody, error) {
 	// Create http request
-	req, err := r.client.NewRequest(nil, r.Method(), r.URL(), nil)
+	req, err := r.client.NewRequest(ctx, r.Method(), r.URL(), nil)
 	if err != nil {
 		return *r.NewResponseBody(), err
 	}

@@ -1,6 +1,7 @@
 package fortnox
 
 import (
+	"context"
 	"net/http"
 	"net/url"
 
@@ -106,9 +107,9 @@ func (r *PostVoucherRequest) URL() url.URL {
 	return r.client.GetEndpointURL("/vouchers", r.PathParams())
 }
 
-func (r *PostVoucherRequest) Do() (PostVoucherResponseBody, error) {
+func (r *PostVoucherRequest) Do(ctx context.Context) (PostVoucherResponseBody, error) {
 	// Create http request
-	req, err := r.client.NewRequest(nil, r.Method(), r.URL(), r.RequestBody())
+	req, err := r.client.NewRequest(ctx, r.Method(), r.URL(), r.RequestBody())
 	if err != nil {
 		return *r.NewResponseBody(), err
 	}
