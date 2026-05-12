@@ -10,8 +10,8 @@ type ArticleRow struct {
 	EAN                string      `json:"EAN,omitempty"`                // EAN code of the article.
 	Housework          bool        `json:"Housework,omitempty"`          // If the article is a housework article.
 	PurchasePrice      StringFloat `json:"PurchasePrice,omitempty"`      // Purchase price of the article.
-	QuantityInStock    float64     `json:"QuantityInStock,omitempty"`    // The quantity of the article that is currently in stock.
-	ReservedQuantity   StringFloat  `json:"ReservedQuantity,omitempty"`   // The quantity of the article that is reserved.
+	QuantityInStock    StringFloat `json:"QuantityInStock,omitempty"`    // The quantity of the article that is currently in stock.
+	ReservedQuantity   StringFloat `json:"ReservedQuantity,omitempty"`   // The quantity of the article that is reserved.
 	SalesPrice         StringFloat `json:"SalesPrice,omitempty"`         // Sales price of the article.
 	StockPlace         string      `json:"StockPlace,omitempty"`         // Stock place of the article.
 	StockValue         StringFloat `json:"StockValue,omitempty"`         // The total value of the article in stock.
@@ -48,7 +48,7 @@ type Article struct {
 	OtherCost                 float64     `json:"OtherCost,omitempty"`
 	PurchaseAccount           int         `json:"PurchaseAccount,omitempty"`
 	PurchasePrice             StringFloat `json:"PurchasePrice,omitempty"`
-	QuantityInStock           float64     `json:"QuantityInStock,omitempty"`
+	QuantityInStock           StringFloat `json:"QuantityInStock,omitempty"`
 	ReservedQuantity          float64     `json:"ReservedQuantity,omitempty"`
 	SalesAccount              int         `json:"SalesAccount,omitempty"`
 	SalesPrice                float64     `json:"SalesPrice,omitempty"`

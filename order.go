@@ -26,8 +26,8 @@ type Order struct {
 	URLTaxReductionList       string            `json:"@urlTaxReductionList,omitempty"`
 	Address1                  string            `json:"Address1,omitempty"`
 	Address2                  string            `json:"Address2,omitempty"`
-	AdministrationFee         int               `json:"AdministrationFee,omitempty"`
-	AdministrationFeeVAT      int               `json:"AdministrationFeeVAT,omitempty"`
+	AdministrationFee         float64           `json:"AdministrationFee,omitempty"`
+	AdministrationFeeVAT      float64           `json:"AdministrationFeeVAT,omitempty"`
 	BasisTaxReduction         int               `json:"BasisTaxReduction,omitempty"`
 	Cancelled                 bool              `json:"Cancelled,omitempty"`
 	City                      string            `json:"City,omitempty"`
