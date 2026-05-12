@@ -40,3 +40,29 @@ func (i *Number) UnmarshalJSON(data []byte) error {
 func (i Number) MarshalJSON() ([]byte, error) {
 	return json.Marshal(int(i))
 }
+
+type StringFloat float64
+
+func (f *StringFloat) UnmarshalJSON(text []byte) (err error) {
+	var flt float64
+	err = json.Unmarshal(text, &flt)
+	if err == nil {
+		*f = StringFloat(flt)
+		return err
+	}
+
+	// error, so try string
+	var s string
+	err = json.Unmarshal(text, &s)
+	if err != nil {
+		return err
+	}
+
+	flt, err = strconv.ParseFloat(s, 64)
+	if err != nil {
+		return err
+	}
+
+	*f = StringFloat(flt)
+	return nil
+}
