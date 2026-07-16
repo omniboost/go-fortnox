@@ -23,9 +23,9 @@ type Invoice struct {
 	CreditInvoiceReference    string            `json:"CreditInvoiceReference,omitempty"` // Reference to the credit invoice, if one exits. The reference must be a document number for an existing credit invoice.
 	City                      string            `json:"City,omitempty"`                   // City for the invoice address.
 	Comments                  string            `json:"Comments"`                         // Comments of the invoice
-	ContractReference         string               `json:"ContractReference,omitempty"`      // Reference to the contract, if one exists.
-	ContributionPercent       float64           `json:"ContributionPercent,omitempty"`    // Invoice contribution in percent.
-	ContributionValue         float64           `json:"ContributionValue,omitempty"`      // Invoice contribution in amount.
+	ContractReference         string            `json:"ContractReference,omitempty"`      // Reference to the contract, if one exists.
+	ContributionPercent       any               `json:"ContributionPercent,omitempty"`    // Invoice contribution in percent.
+	ContributionValue         any               `json:"ContributionValue,omitempty"`      // Invoice contribution in amount.
 	Country                   string            `json:"Country"`                          // Country for the invoice address. Must be a name of an existing country.
 	CostCenter                string            `json:"CostCenter,omitempty"`             // Code of the cost center. The code must be of an existing cost center.
 	Currency                  string            `json:"Currency"`                         // Code of the currency. The code must be of an existing currency.
@@ -134,8 +134,8 @@ type InvoiceRows []InvoiceRow
 type InvoiceRow struct {
 	AccountNumber       int     `json:"AccountNumber"`                 // Account number. If not provided the predefined account will be used.
 	ArticleNumber       string  `json:"ArticleNumber"`                 // Article number.
-	ContributionPercent string  `json:"ContributionPercent,omitempty"` // Contribution Percent.
-	ContributionValue   string  `json:"ContributionValue,omitempty"`   // Contribution Value.
+	ContributionPercent any     `json:"ContributionPercent,omitempty"` // Contribution Percent.
+	ContributionValue   any     `json:"ContributionValue,omitempty"`   // Contribution Value.
 	CostCenter          string  `json:"CostCenter,omitempty"`          // Code of the cost center for the row. The code must be of an existing cost center.
 	DeliveredQuantity   string  `json:"DeliveredQuantity"`             // Delivered quantity.
 	Description         string  `json:"Description"`                   // Row description.
